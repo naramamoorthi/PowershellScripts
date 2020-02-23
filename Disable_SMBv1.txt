@@ -1,0 +1,10 @@
+Check SMBv1:
+Get-WindowsFeatures FS-SMB1
+If SMBv1 is disabled, it will read "Available"
+
+Disable SMBv1:
+Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
+Note: A reboot is required to complete this command and the server will reboot automatically
+
+Check SMBv2:
+Get-SmbServerConfiguration Select EnableSMB2Protocol
