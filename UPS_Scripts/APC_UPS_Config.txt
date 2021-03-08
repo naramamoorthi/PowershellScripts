@@ -1,0 +1,38 @@
+system -n "UPS_Hostname"
+system -c "Alert/SystemSupport_Email"
+system -l "LocationCode"
+system -s
+dns -p DNSIP
+dns -s Secondary_DNSIP
+dns -d DomainName
+dns -h UPS_Hostname
+dns -OM
+system -s enable
+snmp -S disable
+snmpv3 -S enable
+snmpv3 -u1 service_snmpv3
+snmpv3 -n1 SNMP_Server_IP
+snmpv3 -ac1 enable
+date -f dd.mm.yyyy
+date -z +08:00
+date -t 17:07:00
+ntp -OM enable
+ntp -p NTP_Server_IP
+ntp -s Secondary_NTP_Server_IP
+user
+ftp -S disable
+user -n apc
+user -n apc -cp apc -pw NewPassword
+user -n newuser -e enable -pw apc
+user -n newuser -pw NewPass
+email -g1 enable
+email -t1 Alert/SystemSupport_Email
+smtp -f SMTP_From_Email_Address
+smtp -s SMTP_Server_Address
+session
+snmptrap -u1 profile1 service_snmpv3
+snmptrap -r1 SNMP_Server
+snmptrap -a1 disable
+upsabout
+xferStatus
+alarmcount
