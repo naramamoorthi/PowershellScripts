@@ -1,0 +1,8 @@
+robocopy.exe "\\source_server\path" "\\destination_server\path" *.* /E /XF Thumbs.db ~$*.* /XD "$RECYCLE.BIN" "System Volume Information" "Autorun.inf" /ZB /XO /COPYALL /SEC /SECFIX /MIR /R:3 /W:3 /TEE /MT:32 /log+:"Path_to_Logfile\Logfile.txt"
+
+Notes: 
+1. File exclusions: Thumbs.db and Temporary Microsoft Office Files
+2. Directory exclusions: Recycle bin temp folder and System Volume Information data. Autorun.if is usually a file however a folder with such name is indicative of a virus/worm infections and will be excluded too.
+3. Multithread switch will need to be tuned to the system's processing, IO and network capacity.
+4. Security Fix switch is included to fix any potential security discrepancies in the objects being copied
+5. Important Note: MIR switch will mirror the data from source to destination. Any data that exists in the destination but not in the source will be deleted from the destination.
